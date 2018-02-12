@@ -3,6 +3,7 @@ image: registry.dev-sandbox.fpcomplete.com/ops/default-build-image@sha256:ec289a
 
 stages:
   - lint
+  - build
 
 yamllint:
   stage: lint
@@ -21,3 +22,15 @@ shellcheck:
     - shellcheck $(find -path */.terraform/* -prune
                      -o -name '*.sh'
                      -print)
+
+ubuntu-xenial-ami:
+  stage: build
+  script:
+    - cd ./ubuntu-xenial
+    - make build
+  artifacts:
+    paths:
+      - "${CI_JOB_NAME}.txt"
+      - "${CI_JOB_NAME}-manifest.json"
+  variables:
+    CI_JOB_NAME: 'ubuntu-xenial-ami'
