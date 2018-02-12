@@ -1,5 +1,5 @@
 ---
-image: registry.dev-sandbox.fpcomplete.com/ops/default-build-image@sha256:ec289ae8a83e25afd594b64fb5ca098eeedbb7a7b0983d5396b645841164996b
+image: registry.dev-sandbox.fpcomplete.com/ops/default-build-image@sha256:26f06a778063afae7153381c331d1817237be0e105c04c9fc95b876877e840fa
 
 stages:
   - lint
