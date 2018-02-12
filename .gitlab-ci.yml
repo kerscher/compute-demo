@@ -26,7 +26,7 @@ shellcheck:
 ubuntu-xenial-ami:
   stage: build
   script:
-    - cd ./ubuntu-xenial
+    - cd ./packer/ubuntu-xenial
     - make build
   artifacts:
     paths:
