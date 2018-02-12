@@ -13,11 +13,13 @@ SSH_KEY="uploads/id_rsa"
 # lookup the first few in our terraform build env
 cd "${SCRIPT_PATH}/../terraform-vpc"
 
+set +x
 [[ -z "${SOURCE_AMI}" ]] && SOURCE_AMI="$(terraform output xenial_ami_id)"
 [[ -z "${VPC_ID}"     ]] && VPC_ID="$(terraform output vpc_id)"
 [[ -z "${SUBNET_ID}"  ]] && SUBNET_ID="$(terraform output subnet_id)"
 [[ -z "${REGION}"     ]] && REGION="$(terraform output region)"
 export SOURCE_AMI VPC_ID SUBNET_ID REGION
+set -x
 
 envsubst <"${AMI_BUILD_TEMP}" > "${AMI_BUILD_CONF}"
 cat "${AMI_BUILD_CONF}"
@@ -27,10 +29,12 @@ get_packer() {
         | jq -r ".value | .\"${1}\""
 }
 
+set +x
 [[ -z "${AWS_ACCESS_KEY_ID}"     ]] && AWS_ACCESS_KEY_ID=$(get_packer 'access-key')
 [[ -z "${AWS_SECRET_ACCESS_KEY}" ]] && AWS_SECRET_ACCESS_KEY=$(get_packer 'secret')
 export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION="${REGION}"
+set -x
 
 cd "${PACKER_BASE_PATH}"
 if [ -f "${SSH_KEY}" ] ; then
