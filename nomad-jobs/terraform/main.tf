@@ -22,9 +22,10 @@ module "prometheus-exec" {
 
 data "template_file" "fabio-manage-configuration" {
   vars {
-    clientca = "${null_resource.vars_fabio_manage.triggers.ca_path}"
-    cert     = "${null_resource.vars_fabio_manage.triggers.cert_path}"
-    token    = "${null_resource.vars_fabio_manage.triggers.consul_token}"
+    clientca      = "${null_resource.vars_fabio_manage.triggers.ca_path}"
+    cert          = "${null_resource.vars_fabio_manage.triggers.cert_path}"
+    token         = "${null_resource.vars_fabio_manage.triggers.consul_token}"
+    consul_server = "${var.consul_server}"
   }
 
   template = "${file("./templates/fabio-manage.conf")}"
@@ -43,9 +44,10 @@ module "fabio-manage" {
 
 data "template_file" "fabio-compute-configuration" {
   vars {
-    clientca = "${null_resource.vars_fabio_compute.triggers.ca_path}"
-    cert     = "${null_resource.vars_fabio_compute.triggers.cert_path}"
-    token    = "${null_resource.vars_fabio_compute.triggers.consul_token}"
+    clientca      = "${null_resource.vars_fabio_compute.triggers.ca_path}"
+    cert          = "${null_resource.vars_fabio_compute.triggers.cert_path}"
+    token         = "${null_resource.vars_fabio_compute.triggers.consul_token}"
+    consul_server = "${var.consul_server}"
   }
 
   template = "${file("./templates/fabio-compute.conf")}"
