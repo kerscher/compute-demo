@@ -41,24 +41,18 @@ variable "prometheus" {
 }
 
 # Fabio
-variable "fabio_manage_token" {
-  description = "Token with ACL only to access paths created above. Must be created separately."
-}
-
-variable "fabio_compute_token" {
-  description = "Token with ACL only to access paths created above. Must be created separately."
-}
-
 resource "null_resource" "vars_fabio_manage" {
   triggers = {
     run        = true
     node_class = "manage"
 
-    ca          = "${file("fabio_manage.pem")}"
+    consul_token = "${file("secrets/fabio_manage_consul_token.txt")}"
+
+    ca          = "${file("secrets/fabio_manage.pem")}"
     ca_path     = "${var.consul_kv_certs}/fabio/manage/ca"
     ca_api_path = "${var.consul_server}/${var.consul_kv_prefix}/${var.consul_kv_certs}/fabio/manage/ca"
 
-    cert          = "${file("fabio_manage.crt")}"
+    cert          = "${file("secrets/fabio_manage.crt")}"
     cert_path     = "${var.consul_kv_certs}/fabio/manage/tls"
     cert_api_path = "${var.consul_server}/${var.consul_kv_prefix}/${var.consul_kv_certs}/fabio/manage/tls"
   }
@@ -69,11 +63,13 @@ resource "null_resource" "vars_fabio_compute" {
     run        = true
     node_class = "compute"
 
-    ca          = "${file("fabio_compute.pem")}"
+    consul_token = "${file("secrets/fabio_compute_consul_token.txt")}"
+
+    ca          = "${file("secrets/fabio_compute.pem")}"
     ca_path     = "${var.consul_kv_certs}/fabio/compute/ca"
     ca_api_path = "${var.consul_server}/${var.consul_kv_prefix}/${var.consul_kv_certs}/fabio/compute/ca"
 
-    cert          = "${file("fabio_compute.crt")}"
+    cert          = "${file("secrets/fabio_compute.crt")}"
     cert_path     = "${var.consul_kv_certs}/fabio/compute/tls"
     cert_api_path = "${var.consul_server}/${var.consul_kv_prefix}/${var.consul_kv_certs}/fabio/compute/tls"
   }

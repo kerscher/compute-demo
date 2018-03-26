@@ -1,6 +1,6 @@
 resource "consul_keys" "fabio-manage" {
   datacenter = "${var.datacenters}"
-  token      = "${var.consul_token}"
+  token      = "${null_resource.vars_fabio_manage.triggers.consul_token}"
 
   key {
     path  = "${null_resource.vars_fabio_manage.triggers.ca_path}"
@@ -15,7 +15,7 @@ resource "consul_keys" "fabio-manage" {
 
 resource "consul_keys" "fabio-compute" {
   datacenter = "${var.datacenters}"
-  token      = "${var.consul_token}"
+  token      = "${null_resource.vars_fabio_compute.triggers.consul_token}"
 
   key {
     path  = "${null_resource.vars_fabio_compute.triggers.ca_path}"
