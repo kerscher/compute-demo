@@ -1,5 +1,7 @@
 resource "consul_keys" "fabio-manage" {
-  datacenter = "${var.datacenters}"
+  count = "${length(var.datacenters)}"
+
+  datacenter = "${element(var.datacenters, count.index)}"
   token      = "${null_resource.vars_fabio_manage.triggers.consul_token}"
 
   key {
@@ -14,7 +16,9 @@ resource "consul_keys" "fabio-manage" {
 }
 
 resource "consul_keys" "fabio-compute" {
-  datacenter = "${var.datacenters}"
+  count = "${length(var.datacenters)}"
+
+  datacenter = "${element(var.datacenters, count.index)}"
   token      = "${null_resource.vars_fabio_compute.triggers.consul_token}"
 
   key {
