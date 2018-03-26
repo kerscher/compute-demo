@@ -34,8 +34,8 @@ module "fabio-manage" {
   source = "github.com/kerscher/terraform-cluster-common-nomad-jobs//fabio?ref=compute-demo-develop"
 
   job_name      = "fabio-manage"
-  run           = "${null_resource.vars.fabio_manage.triggers.run}"
-  node_class    = "${null_resource.vars.fabio_manage.triggers.node_class}"
+  run           = "${null_resource.vars_fabio_manage.triggers.run}"
+  node_class    = "${null_resource.vars_fabio_manage.triggers.node_class}"
   region        = "${var.region}"
   datacenters   = "${var.datacenters}"
   configuration = "${data.template_file.fabio-manage-configuration.rendered}"
@@ -43,8 +43,8 @@ module "fabio-manage" {
 
 data "template_file" "fabio-compute-configuration" {
   vars {
-    clientca = "${var.fabio_compute_ca["path"]}"
-    cert     = "${var.fabio_compute_cert["path"]}"
+    clientca = "${null_resource.vars_fabio_compute.triggers.ca_path}"
+    cert     = "${null_resource.vars_fabio_compute.triggers.cert_path}"
     token    = "${var.fabio_compute_token}"
   }
 
@@ -52,17 +52,19 @@ data "template_file" "fabio-compute-configuration" {
 }
 
 module "fabio-compute" {
-  source        = "github.com/kerscher/terraform-cluster-common-nomad-jobs//fabio?ref=compute-demo-develop"
+  source = "github.com/kerscher/terraform-cluster-common-nomad-jobs//fabio?ref=compute-demo-develop"
+
   job_name      = "fabio-compute"
-  run           = "${null_resource.vars.fabio_compute.triggers.run}"
-  node_class    = "${null_resource.vars.fabio_compute.triggers.node_class}"
+  run           = "${null_resource.vars_fabio_compute.triggers.run}"
+  node_class    = "${null_resource.vars_fabio_compute.triggers.node_class}"
   region        = "${var.region}"
   datacenters   = "${var.datacenters}"
   configuration = "${data.template_file.fabio-compute-configuration.rendered}"
 }
 
 module "grafana" {
-  source      = "github.com/kerscher/terraform-cluster-common-nomad-jobs//grafana?ref=compute-demo-develop"
+  source = "github.com/kerscher/terraform-cluster-common-nomad-jobs//grafana?ref=compute-demo-develop"
+
   run         = "${var.grafana["run"]}"
   region      = "${var.region}"
   datacenters = "${var.datacenters}"
