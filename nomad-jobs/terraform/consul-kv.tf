@@ -3,13 +3,13 @@ resource "consul_keys" "fabio-manage" {
   token      = "${var.consul_token}"
 
   key {
-    path  = "${var.fabio_manage_cert["path"]}"
-    value = "${var.fabio_manage_cert["value"]}"
+    path  = "${null_resource.vars_fabio_manage.triggers.ca_path}"
+    value = "${null_resource.vars_fabio_manage.triggers.ca}"
   }
 
   key {
-    path  = "${var.fabio_manage_ca["path"]}"
-    value = "${var.fabio_manage_ca["value"]}"
+    path  = "${null_resource.vars_fabio_manage.triggers.cert_path}"
+    value = "${null_resource.vars_fabio_manage.triggers.cert}"
   }
 }
 
@@ -18,12 +18,12 @@ resource "consul_keys" "fabio-compute" {
   token      = "${var.consul_token}"
 
   key {
-    path  = "${var.fabio_compute_cert["path"]}"
-    value = "${var.fabio_compute_cert["value"]}"
+    path  = "${null_resource.vars_fabio_compute.triggers.ca_path}"
+    value = "${null_resource.vars_fabio_compute.triggers.ca}"
   }
 
   key {
-    path  = "${var.fabio_compute_ca["path"]}"
-    value = "${var.fabio_compute_ca["value"]}"
+    path  = "${null_resource.vars_fabio_compute.triggers.cert_path}"
+    value = "${null_resource.vars_fabio_compute.triggers.cert}"
   }
 }
