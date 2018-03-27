@@ -26,7 +26,9 @@ job "${job_name}" {
       service {
         name = "nginx-${job_name}"
         tags = [
-          "${fabio_prefix}-${domain}/ proto=https tlsskipverify=true"
+          "${fabio_prefix}-${domain}/ proto=https tlsskipverify=true",
+          "${fabio_prefix}-${domain}/",
+          "${fabio_prefix}-/"
         ]
 
         port = "http"
