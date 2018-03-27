@@ -7,6 +7,10 @@ variable "consul_server" {
   description = "Address of Consul server"
 }
 
+variable "local_consul_agent" {
+  default = "http://localhost:8500"
+}
+
 variable "consul_token" {
   description = "Token to access Consul"
 }

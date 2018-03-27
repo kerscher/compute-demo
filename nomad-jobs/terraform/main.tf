@@ -25,7 +25,7 @@ data "template_file" "fabio-manage-configuration" {
     clientca      = "${null_resource.vars_fabio_manage.triggers.ca_path}"
     cert          = "${null_resource.vars_fabio_manage.triggers.cert_path}"
     token         = "${null_resource.vars_fabio_manage.triggers.consul_token}"
-    consul_server = "${var.consul_server}"
+    consul_server = "${var.local_consul_agent}"
   }
 
   template = "${file("./templates/fabio-manage.conf")}"
@@ -47,7 +47,7 @@ data "template_file" "fabio-compute-configuration" {
     clientca      = "${null_resource.vars_fabio_compute.triggers.ca_path}"
     cert          = "${null_resource.vars_fabio_compute.triggers.cert_path}"
     token         = "${null_resource.vars_fabio_compute.triggers.consul_token}"
-    consul_server = "${var.consul_server}"
+    consul_server = "${var.local_consul_agent}"
   }
 
   template = "${file("./templates/fabio-compute.conf")}"
