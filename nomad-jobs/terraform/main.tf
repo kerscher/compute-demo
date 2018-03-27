@@ -14,7 +14,7 @@ module "prometheus-exec" {
 
   run           = "${var.prometheus["run"]}"
   region        = "${var.region}"
-  datacenters   = "${var.datacenters}"
+  datacenters   = "${var.nomad_datacenters}"
   node_class    = "${var.prometheus["node_class"]}"
   consul_server = "${var.consul_server}"
   consul_token  = "${var.consul_token}"
@@ -38,7 +38,7 @@ module "fabio-manage" {
   run           = "${null_resource.vars_fabio_manage.triggers.run}"
   node_class    = "${null_resource.vars_fabio_manage.triggers.node_class}"
   region        = "${var.region}"
-  datacenters   = "${var.datacenters}"
+  datacenters   = "${var.nomad_datacenters}"
   configuration = "${data.template_file.fabio-manage-configuration.rendered}"
 }
 
@@ -60,7 +60,7 @@ module "fabio-compute" {
   run           = "${null_resource.vars_fabio_compute.triggers.run}"
   node_class    = "${null_resource.vars_fabio_compute.triggers.node_class}"
   region        = "${var.region}"
-  datacenters   = "${var.datacenters}"
+  datacenters   = "${var.nomad_datacenters}"
   configuration = "${data.template_file.fabio-compute-configuration.rendered}"
 }
 
@@ -69,7 +69,7 @@ module "grafana" {
 
   run         = "${var.grafana["run"]}"
   region      = "${var.region}"
-  datacenters = "${var.datacenters}"
+  datacenters = "${var.nomad_datacenters}"
   node_class  = "${var.grafana["node_class"]}"
 }
 
@@ -78,7 +78,7 @@ module "hashi-ui" {
 
   run           = "${var.hashi-ui["run"]}"
   region        = "${var.region}"
-  datacenters   = "${var.datacenters}"
+  datacenters   = "${var.nomad_datacenters}"
   nomad_address = "${var.nomad_address}"
   node_class    = "${var.hashi-ui["node_class"]}"
 }
@@ -88,7 +88,7 @@ module "node_exporter" {
 
   run         = "${var.node_exporter["run"]}"
   region      = "${var.region}"
-  datacenters = "${var.datacenters}"
+  datacenters = "${var.nomad_datacenters}"
   job_name    = "${var.node_exporter["job_name"]}"
 }
 
@@ -97,7 +97,7 @@ module "nomad-metrics" {
 
   run         = "${var.nomad-metrics["run"]}"
   region      = "${var.region}"
-  datacenters = "${var.datacenters}"
+  datacenters = "${var.nomad_datacenters}"
   node_class  = "${var.nomad-metrics["node_class"]}"
 }
 
@@ -106,7 +106,7 @@ module "tls-example" {
 
   run          = "${var.tls-example["run"]}"
   region       = "${var.region}"
-  datacenters  = "${var.datacenters}"
+  datacenters  = "${var.nomad_datacenters}"
   node_class   = "${var.tls-example["node_class"]}"
   fabio_prefix = "${var.tls-example["fabio_prefix"]}"
   domain       = "${var.tls-example["domain"]}"

@@ -24,8 +24,13 @@ variable "region" {
   type        = "string"
 }
 
-variable "datacenters" {
+variable "nomad_datacenters" {
   description = "nomad datacenters"
+  type        = "list"
+}
+
+variable "consul_datacenters" {
+  description = "consul datacenters"
   type        = "list"
 }
 
