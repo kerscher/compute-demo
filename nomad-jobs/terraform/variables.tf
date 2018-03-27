@@ -146,6 +146,6 @@ variable "tls-example" {
     run          = true
     node_class   = "compute"
     fabio_prefix = "urlprefix-compute-demo-compute-"
-    domain       = "compute-demo.com"
+    domain       = "compute-demo.co"
   }
 }
