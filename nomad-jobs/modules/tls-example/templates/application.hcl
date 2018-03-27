@@ -30,7 +30,6 @@ job "${job_name}" {
         port = "http"
         
         tags = [
-          "${fabio_prefix}-${domain}/ proto=https tlsskipverify=true",
           "${fabio_prefix}-${domain}/",
           "${fabio_prefix}-/"
         ]
