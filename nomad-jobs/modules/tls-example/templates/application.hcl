@@ -31,7 +31,6 @@ job "${job_name}" {
         
         tags = [
           "${fabio_prefix}-${domain}/",
-          "${fabio_prefix}-/"
         ]
 
         check {
